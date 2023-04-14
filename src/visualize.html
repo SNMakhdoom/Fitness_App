@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Gym Utils</title>
+    <link rel="stylesheet" href="index.css">
+    <script defer src="visualizeLogic.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+  </head>
+  <body>
+    <section class="section">
+      <div class="tabs is-centered">
+        <ul>
+          <li id="addTab"><a>Add</a></li>
+          <li id="visualizeTab" class="is-active"><a>View</a></li>
+          <li id="editTab"><a>Edit</a></li>
+          <li id="deleteTab"><a>Delete</a></li>
+          <li id="settingsTab"><a>Settings</a></li>
+        </ul>
+      </div>
+      
+      <div class="container is-fluid">
+        
+        
+            
+              <div class="table-container">
+                <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth" id="visualizeTable">
+                  <thread>
+                    <th>Date</th>
+                    <th>Weight</th>
+                    <th>Kcal</th>
+                  </thread>
+                  <tbody>
+                  </tbody>
+                </table>
+              </div>
+              <canvas id="chart" ></canvas>
+              <p class="title has-text-centered">Stats:</p>
+              <div class="has-text-centered">
+                <p id="pesoMassimo">Max weight: </p>
+                <p id="pesoMedio">Average weight: </p>
+                <p id="pesoMinimo">Min weight: </p>
+                <p id="kcalMassime">Max Kcal: </p>
+                <p id="kcalMedie">Average Kcal: </p>
+                <p id="kcalMinime">Min Kcal: </p>
+            </div>
+          
+    
+      </div>
+    </section>  
+  </body>
+</html>
