@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>View Data</title>
+    <link rel="stylesheet" href="/assets/styles.css">
+    <style>
+        /* Add specific styles for view.html here */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 0;
+            color: #333;
+        }
+
+        #myChart {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #333;
+        }
+        .light-theme {
+        background-color: #fff;
+        color: #333;
+    }
+
+    .dark-theme {
+        background-color: #333;
+        color: #fff;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>View Data</h1>
+        <canvas id="myChart"></canvas>
+        <a href="index.html">Back to Home</a>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Fetching the data
+        const fs = require('fs');
+        const data = fs.readFileSync('./data/fitness_data.json');
+        const jsonData = JSON.parse(data);
+    
+    
+        const labels = jsonData.map(entry => `${entry.date} - ${entry.name}`);
+        const ages = jsonData.map(entry => entry.age);
+        const weights = jsonData.map(entry => entry.weight);
+        const heights = jsonData.map(entry => entry.height);
+        const bmis = jsonData.map(entry => entry.bmi);
+        const caloriesBurned = jsonData.map(entry => entry.caloriesBurned);
+
+    
+        // Creating a chart
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'line', // or 'bar', 'pie', etc.
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Age',
+                    data: ages,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Weight',
+                    data: weights,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Height',
+                    data: heights,
+                    backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                    borderColor: 'rgba(153, 102, 255, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'BMI',
+                    data: bmis,
+                    backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                    borderColor: 'rgba(255, 206, 86, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: 'Calories Burned',
+                    data: caloriesBurned,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        document.body.onload = function() {
+        // Get the selected theme from localStorage
+        var selectedTheme = localStorage.getItem('selectedTheme');
+
+        // If a theme has been selected, apply it
+        if (selectedTheme) {
+            document.body.className = selectedTheme + '-theme';
+        }
+    };
+    </script>
+    
+</body>
+</html>

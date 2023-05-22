@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Entry</title>
+    <link rel="stylesheet" href="assets/styles.css">
+    <style>
+ /* Add specific styles for edit.html here */
+ #data-container div:nth-child(even) {
+        background-color: #f2f2f2; /* Light grey background for even rows */
+    }
+
+    #data-container div:nth-child(odd) {
+        background-color: #fcfcfc; /* Lighter grey background for odd rows */
+    }
+
+    #data-container div:hover {
+        background-color: #e9e9e9; /* Slightly darker grey when hovered */
+    }
+
+    .selected {
+        background-color: #65c1a2; /* Light green when selected */
+    }
+ .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 0;
+            color: #333;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #333;
+        }
+
+        #data-container {
+            margin-bottom: 20px;
+        }
+
+        #data-container div {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #data-container div:hover {
+            background-color: #e9e9e9;
+        }
+
+        .selected {
+            background-color: #65c1a2;
+        }
+        .light-theme {
+        background-color: #fff;
+        color: #333;
+    }
+
+    .dark-theme {
+        background-color: #333;
+        color: #5ebbd5;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Delete Entry</h1>
+        <div id="data-container"></div>
+        <button id="delete-button">Delete Selected Entry</button>
+        <a href="index.html">Back to Home</a>
+    </div>
+    
+    <script>
+        const dataContainer = document.getElementById('data-container');
+        const deleteButton = document.getElementById('delete-button');
+        let selectedEntry = null;
+
+        // Function to read and display the JSON data
+        function displayData() {
+            // Read the JSON file
+            const fs = require('fs');
+            const data = fs.readFileSync('./data/fitness_data.json');
+            const jsonData = JSON.parse(data);
+
+            // Display the existing data in the container
+            jsonData.forEach(entry => {
+                const entryDiv = document.createElement('div');
+                entryDiv.textContent = `${entry.name} - Age: ${entry.age}, Weight: ${entry.weight}, Height: ${entry.height}`;
+
+                // Set the selected entry when clicked
+                entryDiv.addEventListener('click', function() {
+                    if (selectedEntry) {
+                        selectedEntry.classList.remove('selected');
+                    }
+                    entryDiv.classList.add('selected');
+                    selectedEntry = entryDiv;
+                });
+
+                dataContainer.appendChild(entryDiv);
+            });
+        }
+
+        // Call the function to display the data
+        displayData();
+
+        // Handle button click for deletion
+        deleteButton.addEventListener('click', function() {
+            if (selectedEntry) {
+                deleteData(selectedEntry.textContent.split(' - ')[0]);
+                selectedEntry.remove();
+                selectedEntry = null;
+            }
+        });
+
+        const fs = require('fs');
+
+        function deleteData(entryName) {
+            // Read the JSON file
+            const data = fs.readFileSync('./data/fitness_data.json', 'utf8');
+            const jsonData = JSON.parse(data);
+
+            // Find the index of entry to delete
+            const entryIndex = jsonData.findIndex(entry => entry.name === entryName);
+
+            if (entryIndex !== -1) {
+                // Remove the entry from the array
+                jsonData.splice(entryIndex, 1);
+
+                // Convert the updated data structure back into JSON format
+                const updatedJsonData = JSON.stringify(jsonData, null, 2);
+
+                // Write the updated JSON content back to the file
+                fs.writeFileSync('./data/fitness_data.json', updatedJsonData, 'utf8');
+
+                console.log('Data deleted:', entryName);
+            } else {
+                console.log('Entry not found');
+            }
+        }
+        document.body.onload = function() {
+        // Get the selected theme from localStorage
+        var selectedTheme = localStorage.getItem('selectedTheme');
+
+        // If a theme has been selected, apply it
+        if (selectedTheme) {
+            document.body.className = selectedTheme + '-theme';
+        }
+    };
+    </script>
+</body>
+</html>
