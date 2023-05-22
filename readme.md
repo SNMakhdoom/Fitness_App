@@ -47,5 +47,7 @@ By implementing these enhancements, the Fitness Management System could become a
 ![Delete](images/Screenshot%202023-05-21%20at%202.57.46%20PM.png)
 ![Settings](images/Screenshot%202023-05-21%20at%202.57.53%20PM.png)
 ![Dark](images/Screenshot%202023-05-21%20at%202.58.00%20PM.png)
-![View](images/Screenshot 2023-05-21 at 4.05.21 PM.png)
+![View](images/Screenshot%202023-05-21%20at%204.05.21%20PM.png)
+
+
 
