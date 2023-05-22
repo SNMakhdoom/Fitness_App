@@ -40,3 +40,12 @@ However, there is room for improvement and future work, including:
 
 By implementing these enhancements, the Fitness Management System could become a comprehensive tool for individual fitness tracking and progress monitoring.
 
+## Screenshots
+
+![Home](images/Screenshot%202023-05-21%20at%202.57.17%20PM.png)
+![Edit](images/Screenshot%202023-05-21%20at%202.57.25%20PM.png)
+![Delete](images/Screenshot%202023-05-21%20at%202.57.46%20PM.png)
+![Settings](images/Screenshot%202023-05-21%20at%202.57.53%20PM.png)
+![Dark](images/Screenshot%202023-05-21%20at%202.58.00%20PM.png)
+![View](images/Screenshot%202023-05-21%20at%202.58.26%20PM.png)
+
